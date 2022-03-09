@@ -4,8 +4,15 @@
 - What we accomplished
 
 ### Creators
-Austin, Andrew, Jacob & Jem
+Austin, Andy, Jacob & Jem
 
 ### Links
 https://github.com/irvingjem/group-project <br>
 https://irvingjem.github.io/group-project/
+
+## MVP 
+Race, Class, Name
+
+## API's Used 
+https://api.fungenerators.com/name
+https://www.dnd5eapi.co/
