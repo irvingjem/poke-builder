@@ -7,8 +7,9 @@
 Race, Class, Name
 
 ## API's Used 
-https://api.fungenerators.com/name
+https://randomuser.me/api/
 https://www.dnd5eapi.co/
+http://foaas.com/off/Tom/Everyone?shoutcloud.
 
 ### Links
 https://github.com/irvingjem/group-project <br>
