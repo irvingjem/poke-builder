@@ -1,4 +1,4 @@
-var apiNames = "https://randomuser.me/api/"
+var apiNames = "https://fungenerators.com/name/pokemon/"
 fetch(
         apiNames
     )
@@ -6,18 +6,10 @@ fetch(
         return cityResponse.json();
     });
 
-var apiRaces = "https://www.dnd5eapi.co/api/races"
+var apiStats = "https://pokeapi.co/"
 fetch(
-        apiRaces
+        apiStats
     )
     .then(function(raceResponse) {
         return raceResponse.json();
-    });
-
-var apiClasses = "https://www.dnd5eapi.co/api/classes"
-fetch(
-        apiClasses
-    )
-    .then(function(classResponse) {
-        return classResponse.json();
     });

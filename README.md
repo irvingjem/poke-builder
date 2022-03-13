@@ -4,12 +4,11 @@
 - What we accomplished
 
 ## MVP - Function
-Race, Class, Name
+When I click generate the pokemon "Pikachu" Shows up and lists a few abilities
 
 ## API's Used 
-https://randomuser.me/api/
-https://www.dnd5eapi.co/
-http://foaas.com/off/Tom/Everyone?shoutcloud.
+https://fungenerators.com/name/pokemon/ - Name Generator <br>
+https://pokeapi.co/ - Stats etc.
 
 ### Links
 https://github.com/irvingjem/group-project <br>
