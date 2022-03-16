@@ -1,13 +1,7 @@
 // Global Variables
-var pokeTypeOne = document.querySelector('.poke-type-one');
-var pokeTypeTwo = document.querySelector('.poke-type-two');
-var pokeAbilityOne = document.querySelector('.poke-type-one');
-var pokeAbilityTwo = document.querySelector('.poke-type-two');
-var apiStats = "https://pokeapi.co/"
-
 var abilitiesList = document.getElementById("abilities");
 
-// Grab pokemon by name Fetch Name Function -- Jem
+// Grab pokemon name / and image
 var fetchPokeData = function(pokeName) {
     var pokeNameURL = "https://pokeapi.co/api/v2/pokemon/" + pokeName.toLowerCase();
     fetch(
@@ -32,13 +26,9 @@ var fetchPokeData = function(pokeName) {
             imgElement.setAttribute("src", pokeNameData.sprites.front_default);
             imgElement.setAttribute("alt", dataTypes);
 
-            mainScreen.classList.add(dataFirstType['name']);
-            pokeName.textContent = capitalize(data['name']);
-            pokeFrontImage.src = data['sprites']['front_default'] || '';
-            pokeBackImage.src = data['sprites']['back_default'] || '';
         });
 };
-
+// Removed old Data from past seach
 function resetScreen() {
     //need to fill 
     abilities.innerHTML = "";
