@@ -125,6 +125,19 @@ moves.forEach(function (move) {
 
 // Event listener for Generate, Save, Delete -- TBD
 
+<button id="rounded-md shadow">Generate</button>
+document.getElementById("mybtn").addEventListener("click", function() {
+    
+})
+
+element.addEventListener("click", buttonClickhandler);
+function buttonClickhandler(event) {
+    console.log('Button Clicked');
+}
+const btn= document.querySelector('.btn');
+btn.addEventListener('click', buttonClickhandler);
+
+
 // var formSubmitHandler = function(event) {
 //     event.preventDefault();
 //     // get city name value from input element
