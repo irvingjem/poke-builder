@@ -4,7 +4,8 @@
 - What we accomplished
 
 ## MVP - Function
-When I click generate the pokemon "Pikachu" Shows up and lists a few abilities
+When I click generate the pokemon "Pikachu" Shows up and lists a few abilities <br>
+Full functionality would be able to generate any pokemon and abilities
 
 ## API's Used 
 https://fungenerators.com/name/pokemon/ - Name Generator <br>
