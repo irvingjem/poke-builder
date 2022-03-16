@@ -1,15 +1,16 @@
+var apiNames = "https://fungenerators.com/name/pokemon/";
+fetch(apiNames).then(function (namesResponse) {
+  return namesResponse.json();
+});
 
-// Fetch Name Function 
 
 
-var apiNames = "https://fungenerators.com/name/pokemon/"
-fetch(
-        apiNames
-    )
-    .then(function(namesResponse) {
-        return namesResponse.json();
-    });
+// Fetch Abilities Function
 
+var apiStats = "https://pokeapi.co/";
+fetch(apiStats).then(function (statsResponse) {
+  return statsResponse.json();
+});
 // Display Name Function - Youre doing this one Austin
 let pokeDiv = document.ElementById("pokename");
 let getPokeName = function() {
@@ -50,7 +51,6 @@ pokeDiv.append(getPokeName);
 // Fetch Abilities Function 
 
 var apiStats = "https://pokeapi.co/"
-=======
 // Global Variables
 var pokeListItems = document.querySelectorAll('.list-item');
 var pokeTypeOne = document.querySelector('.poke-type-one');
@@ -106,9 +106,22 @@ fetch(
         return statsResponse.json();
     });
 
+
 // Display Abilities function -- Jem
 
-
+var abilitiesList = document.getElementById("abilities");
+var moves = ["Static", "Lightning Rod"];
+// for each of the moves listed above
+// creates a div with classes and inner html generated for each move
+// template literals ${move} apply to each row
+moves.forEach(function (move) {
+  var moveListEl = document.createElement("li");
+  //   moveListEl.classList.add("text-gray-l");
+  moveListEl.innerHTML = `${move}`;
+  // appends to container
+  abilitiesList.append(moveListEl);
+  console.log(this);
+});
 
 // Event listener for Generate, Save, Delete -- TBD
 
@@ -117,7 +130,7 @@ fetch(
 //     // get city name value from input element
 //     var cityname = cityNameInputEl.value.trim();
 
-//     // Set city name in local storage and generate search history 
+//     // Set city name in local storage and generate search history
 //     if (cityname) {
 //         searchHistoryArray.push(cityname);
 //         localStorage.setItem("weatherSearch", JSON.stringify(searchHistoryArray));
@@ -135,19 +148,11 @@ fetch(
 
 // }
 
-
-
-
-
-
 // Function to grab local image (for now)
 
 // Look in assets folder append to child probably div and create the img
 
-
-
 // Save local | load local (last priority) | Delete Local
-
 
 // var loadHistory = function() {
 //     searchArrray =
@@ -171,6 +176,5 @@ fetch(
 
 //     }
 // }
-
 
 //loadHistory();
