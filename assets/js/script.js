@@ -1,3 +1,4 @@
+
 // Fetch Name Function 
 
 
@@ -49,6 +50,55 @@ pokeDiv.append(getPokeName);
 // Fetch Abilities Function 
 
 var apiStats = "https://pokeapi.co/"
+=======
+// Global Variables
+var pokeListItems = document.querySelectorAll('.list-item');
+var pokeTypeOne = document.querySelector('.poke-type-one');
+var pokeTypeTwo = document.querySelector('.poke-type-two');
+
+// Grab pokemon by name Fetch Name Function -- Jem
+var fetchPokeData = function(pokeName) {
+    var pokeName = "https://pokeapi.co/api/v2/pokemon/pikachu"
+    fetch(
+            pokeName
+        )
+        .then(function(pokeDataresponse) {
+            return pokeDataresponse.json();
+        })
+        .then(function(pokeDataresponse) {
+            console.log(pokeDataresponse)
+            resetScreen();
+
+            var dataTypes = data['types'];
+            var dataFirstType = dataTypes[0];
+            var dataSecondType = dataTypes[1];
+            pokeTypeOne.textContent = capitalize(dataFirstType['type']['name']['abilities']);
+            if (dataSecondType) {
+                pokeTypeTwo.classList.remove('hide');
+                pokeTypeTwo.textContent = capitalize(dataSecondType['type']['name']['abilities']);
+            } else {
+                pokeTypeTwo.classList.add('hide');
+                pokeTypeTwo.textContent = '';
+            }
+            mainScreen.classList.add(dataFirstType['type']['name']);
+
+            pokeName.textContent = capitalize(data['name']);
+            pokeId.textContent = '#' + data['id'].toString().padStart(3, '0');
+            pokeWeight.textContent = data['weight'];
+            pokeHeight.textContent = data['height'];
+            pokeFrontImage.src = data['sprites']['front_default'] || '';
+            pokeBackImage.src = data['sprites']['back_default'] || '';
+        });
+};
+
+
+// Display Name Function -- Jem
+
+
+// Fetch Abilities Function -- Jem
+
+var apiStats = "https://pokeapi.co/api/v2/pokemon/25"
+main
 fetch(
         apiStats
     )
@@ -56,11 +106,11 @@ fetch(
         return statsResponse.json();
     });
 
-// Display Abilities function
+// Display Abilities function -- Jem
 
 
 
-// Event listener for Generate, Save, Delete
+// Event listener for Generate, Save, Delete -- TBD
 
 // var formSubmitHandler = function(event) {
 //     event.preventDefault();
@@ -99,9 +149,9 @@ fetch(
 // Save local | load local (last priority) | Delete Local
 
 
-var loadHistory = function() {
-    searchArrray =
-}
+// var loadHistory = function() {
+//     searchArrray =
+// }
 
 
 
