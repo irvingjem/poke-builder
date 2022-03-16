@@ -2,14 +2,14 @@ var apiNames = "https://fungenerators.com/name/pokemon/"
 fetch(
         apiNames
     )
-    .then(function(nameResponse) {
-        return cityResponse.json();
+    .then(function(namesResponse) {
+        return namesResponse.json();
     });
 
 var apiStats = "https://pokeapi.co/"
 fetch(
         apiStats
     )
-    .then(function(raceResponse) {
-        return raceResponse.json();
+    .then(function(statsResponse) {
+        return statsResponse.json();
     });
