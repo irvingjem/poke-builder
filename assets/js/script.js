@@ -5,48 +5,61 @@ var pokeAbilityOne = document.querySelector('.poke-type-one');
 var pokeAbilityTwo = document.querySelector('.poke-type-two');
 var apiStats = "https://pokeapi.co/"
 
+var abilitiesList = document.getElementById("abilities");
 
 // Grab pokemon by name Fetch Name Function -- Jem
 var fetchPokeData = function(pokeName) {
-    var pokeName = "https://pokeapi.co/api/v2/pokemon/pikachu"
+    var pokeNameURL = "https://pokeapi.co/api/v2/pokemon/" + pokeName.toLowerCase();
     fetch(
-            pokeName
+            pokeNameURL
         )
-        .then(function(pokeDataresponse) {
-            return pokeDataresponse.json();
+        .then(function(pokeNameResponse) {
+            return pokeNameResponse.json();
         })
-        .then(function(pokeDataresponse) {
-            console.log(pokeDataresponse)
+        .then(function(pokeNameData) {
+            console.log("pokeNameData", pokeNameData);
             resetScreen();
 
-            var dataTypes = data['name'];
-            var dataFirstType = dataTypes[0];
-            var dataSecondType = dataTypes[1];
-            pokeTypeOne.textContent = capitalize(dataFirstType['name']);
-            if (dataSecondType) {
-                pokeTypeTwo.classList.remove('hide');
-                pokeTypeTwo.textContent = capitalize(dataSecondType['name']);
-            } else {
-                pokeTypeTwo.classList.add('hide');
-                pokeTypeTwo.textContent = '';
-            }
+            //setting up the character name 
+            var dataTypes = pokeNameData['name'];
+            document.getElementById("pokename").textContent = "Name: " + dataTypes;
+
+            //Calling the ability fetch based on the character name data
+            fetchPokeAbility(dataTypes);
+
+            var imgElement = document.getElementById("characterImg");
+            console.log("characterImg", pokeNameData.sprites.front_default);
+            imgElement.setAttribute("src", pokeNameData.sprites.front_default);
+            imgElement.setAttribute("alt", dataTypes);
+
             mainScreen.classList.add(dataFirstType['name']);
             pokeName.textContent = capitalize(data['name']);
-            pokeId.textContent = '#' + data['id'].toString().padStart(3, '0');
             pokeFrontImage.src = data['sprites']['front_default'] || '';
             pokeBackImage.src = data['sprites']['back_default'] || '';
         });
 };
 
-// Display Name Function - Youre doing this one Austin
-let pokeDiv = document.ElementById("pokename");
+function resetScreen() {
+    //need to fill 
+    abilities.innerHTML = "";
+}
+
+// Display Name Function - Youre doing this one Austin // I updated this to make sure it was printing correctly
+let pokeDiv = document.getElementById("pokeDetails");
 let getPokeName = function() {
     pokeDiv.classList.add("font-bold", "text-xl", "mb-2");
-    pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
+    var pTag = document.createElement("p");
+    pTag.setAttribute("id", "pokename");
+    pTag.textContent = "Name: ";
+    console.log(pTag);
+    //pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
+    //append html to display name
+    pokeDiv.append(pTag);
 };
-//append html to display name
-pokeDiv.append(getPokeName);
+
 //End of Austin work
+getPokeName(); //
+
 //Austin note
 /*
 var hours = [“09”, “10", “11”, “12", “13”, “14", “15”, “16", “17”];
@@ -75,29 +88,38 @@ let getPokeName = function() {
 }); 
 */
 //End Austin note
-// Fetch Abilities Function 
-
-
 
 // Fetch Abilities Function -- Jem
 
-// Fetch Abilities Function
 
-var fetchPokeData = function(pokeName) {
-    var pokeName = "https://pokeapi.co/api/v2/pokemon/pikachu"
+
+var fetchPokeAbility = function(pokeName) {
+    var pokeAbilityURL = "https://pokeapi.co/api/v2/pokemon/" + pokeName;
     fetch(
-            pokeName
+            pokeAbilityURL
         )
-        .then(function(pokeDataresponse) {
-            return pokeDataresponse.json();
+        .then(function(pokeAbilityResponse) {
+            return pokeAbilityResponse.json();
         })
-        .then(function(pokeDataresponse) {
-            console.log(pokeDataresponse)
-            resetScreen();
+        .then(function(pokeAbilityData) {
+            console.log("pokeAbilityData", pokeAbilityData)
+                //resetScreen();
 
-            var dataTypes = data['abilities'];
+            var dataAbility = pokeAbilityData.abilities;
             var dataFirstAbility = dataAbility[0];
             var dataSecondAbility = dataAbility[1];
+            console.log("first", dataFirstAbility, dataSecondAbility);
+            //createElement
+            var liTag = document.createElement("li");
+            liTag.textContent = dataFirstAbility.ability.name;
+            //append it to ul List 
+            abilitiesList.append(liTag);
+            //createElement
+            var liTag2 = document.createElement("li");
+            liTag2.textContent = dataSecondAbility.ability.name;
+            //append it to ul List 
+            abilitiesList.append(liTag2);
+            /*
             pokeAbilityOne.textContent = capitalize(dataFirstAbility['ability']);
             if (dataSecondType) {
                 pokeAbilityTwo.classList.remove('hide');
@@ -112,6 +134,7 @@ var fetchPokeData = function(pokeName) {
             pokeId.textContent = '#' + data['id'].toString().padStart(3, '0');
             pokeFrontImage.src = data['sprites']['front_default'] || '';
             pokeBackImage.src = data['sprites']['back_default'] || '';
+            */
         });
 };
 
@@ -119,19 +142,18 @@ var fetchPokeData = function(pokeName) {
 
 // Display Abilities function -- Andy
 
-var abilitiesList = document.getElementById("abilities");
-var moves = ["Static", "Lightning Rod"];
+// var moves = ["Static", "Lightning Rod"];
 // for each of the moves listed above
 // creates a div with classes and inner html generated for each move
 // template literals ${move} apply to each row
-moves.forEach(function(move) {
-    var moveListEl = document.createElement("li");
-    //   moveListEl.classList.add("text-gray-l");
-    moveListEl.innerHTML = `${move}`;
-    // appends to container
-    abilitiesList.append(moveListEl);
-    console.log(this);
-});
+// moves.forEach(function(move) {
+//     var moveListEl = document.createElement("li");
+//     //   moveListEl.classList.add("text-gray-l");
+//     moveListEl.innerHTML = `${move}`;
+//     // appends to container
+//     abilitiesList.append(moveListEl);
+//     console.log(this);
+// });
 
 // Event listener for Generate, Save, Delete -- TBD
 
@@ -188,3 +210,12 @@ moves.forEach(function(move) {
 // }
 
 //loadHistory();
+
+//on page load call the functions 
+//fetchPokeData();
+var btnGen = document.getElementById("btnGenerate");
+btnGen.addEventListener("click", function() {
+    var searchText = document.getElementById("charcterName").value;
+
+    fetchPokeData(searchText);
+});
