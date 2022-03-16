@@ -89,7 +89,7 @@ var fetchPokeData = function(pokeName) {
             pokeFrontImage.src = data['sprites']['front_default'] || '';
             pokeBackImage.src = data['sprites']['back_default'] || '';
         });
-};
+    };
 
 
 // Display Name Function -- Jem
