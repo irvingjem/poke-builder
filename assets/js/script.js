@@ -214,9 +214,19 @@ btn.addEventListener('click', buttonClickhandler); */
 //fetchPokeData();
 var btnGen = document.getElementById("btnGenerate");
 btnGen.addEventListener("click", function () {
-  var searchText = document.getElementById("charcterName").value;
+  var searchText = document.getElementById("characterName").value;
   var showData = document.getElementById("invisible");
   showData.classList.remove("invisible");
-
   fetchPokeData(searchText);
+  characterName.value = "";
 });
+var enterKey = document.getElementById("enterListener");
+function enterSubmit(event) {
+  event.preventDefault();
+  var searchText = document.getElementById("characterName").value;
+  var showData = document.getElementById("invisible");
+  showData.classList.remove("invisible");
+  fetchPokeData(searchText);
+  characterName.value = "";
+}
+enterKey.addEventListener("submit", enterSubmit);
