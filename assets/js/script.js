@@ -40,7 +40,7 @@ let getPokeName = function() {
     pokeDiv.classList.add("font-bold", "text-xl", "mb-2");
     var pTag = document.createElement("p");
     pTag.setAttribute("id", "pokename");
-    pTag.textContent = "Name: ";
+    pTag.textContent = "Name:  ";
     console.log(pTag);
     //pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
     //append html to display name
@@ -79,10 +79,7 @@ let getPokeName = function() {
 */
 //End Austin note
 
-// Fetch Abilities Function -- Jem
-
-
-
+// Fetch Abilities Function to send to the other fetch function
 var fetchPokeAbility = function(pokeName) {
     var pokeAbilityURL = "https://pokeapi.co/api/v2/pokemon/" + pokeName;
     fetch(
@@ -109,22 +106,6 @@ var fetchPokeAbility = function(pokeName) {
             liTag2.textContent = dataSecondAbility.ability.name;
             //append it to ul List 
             abilitiesList.append(liTag2);
-            /*
-            pokeAbilityOne.textContent = capitalize(dataFirstAbility['ability']);
-            if (dataSecondType) {
-                pokeAbilityTwo.classList.remove('hide');
-                pokeAbilityTwo.textContent = capitalize(dataSecondAbility['ability']);
-            } else {
-                pokeAbilityTwo.classList.add('hide');
-                pokeAbilityTwo.textContent = '';
-            }
-            mainScreen.classList.add(dataFirstType['abilities']);
-
-            pokeName.textContent = capitalize(data['abilities']);
-            pokeId.textContent = '#' + data['id'].toString().padStart(3, '0');
-            pokeFrontImage.src = data['sprites']['front_default'] || '';
-            pokeBackImage.src = data['sprites']['back_default'] || '';
-            */
         });
 };
 
@@ -204,7 +185,7 @@ var fetchPokeAbility = function(pokeName) {
 //on page load call the functions 
 //fetchPokeData();
 var btnGen = document.getElementById("btnGenerate");
-btnGen.addEventListener("click", function() {
+FbtnGen.addEventListener("click", function() {
     var searchText = document.getElementById("charcterName").value;
 
     fetchPokeData(searchText);
