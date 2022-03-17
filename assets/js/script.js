@@ -147,7 +147,7 @@ var fetchPokeAbility = function(pokeName) {
 
 // Event listener for Generate, Save, Delete -- TBD
 
-<button id="rounded-md shadow">Generate</button>
+/* <button id="rounded-md shadow">Generate</button>
 document.getElementById("mybtn").addEventListener("click", function() {
     
 })
@@ -157,7 +157,8 @@ function buttonClickhandler(event) {
     console.log('Button Clicked');
 }
 const btn= document.querySelector('.btn');
-btn.addEventListener('click', buttonClickhandler);
+btn.addEventListener('click', buttonClickhandler); */
+//}
 
 
 // var formSubmitHandler = function(event) {
