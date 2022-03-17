@@ -21,8 +21,8 @@ var fetchPokeData = function(pokeName) {
             //Calling the ability fetch based on the character name data
             fetchPokeAbility(dataTypes);
 
-            var imgElement = document.getElementById("characterImg");
-            console.log("characterImg", pokeNameData.sprites.front_default);
+            var imgElement = document.getElementById("charcterImg");
+            console.log("charcterImg", pokeNameData.sprites.front_default);
             imgElement.setAttribute("src", pokeNameData.sprites.front_default);
             imgElement.setAttribute("alt", dataTypes);
 
