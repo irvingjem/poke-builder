@@ -2,49 +2,47 @@
 var abilitiesList = document.getElementById("abilities");
 
 // Grab pokemon name / and image
-var fetchPokeData = function(pokeName) {
-    var pokeNameURL = "https://pokeapi.co/api/v2/pokemon/" + pokeName.toLowerCase();
-    fetch(
-            pokeNameURL
-        )
-        .then(function(pokeNameResponse) {
-            return pokeNameResponse.json();
-        })
-        .then(function(pokeNameData) {
-            console.log("pokeNameData", pokeNameData);
-            resetScreen();
+var fetchPokeData = function (pokeName) {
+  var pokeNameURL =
+    "https://pokeapi.co/api/v2/pokemon/" + pokeName.toLowerCase();
+  fetch(pokeNameURL)
+    .then(function (pokeNameResponse) {
+      return pokeNameResponse.json();
+    })
+    .then(function (pokeNameData) {
+      console.log("pokeNameData", pokeNameData);
+      resetScreen();
 
-            //setting up the character name 
-            var dataTypes = pokeNameData['name'];
-            document.getElementById("pokename").textContent = "Name: " + dataTypes;
+      //setting up the character name
+      var dataTypes = pokeNameData["name"];
+      document.getElementById("pokename").textContent = "Name: " + dataTypes;
 
-            //Calling the ability fetch based on the character name data
-            fetchPokeAbility(dataTypes);
+      //Calling the ability fetch based on the character name data
+      fetchPokeAbility(dataTypes);
 
-            var imgElement = document.getElementById("charcterImg");
-            console.log("charcterImg", pokeNameData.sprites.front_default);
-            imgElement.setAttribute("src", pokeNameData.sprites.front_default);
-            imgElement.setAttribute("alt", dataTypes);
-
-        });
+      var imgElement = document.getElementById("charcterImg");
+      console.log("charcterImg", pokeNameData.sprites.front_default);
+      imgElement.setAttribute("src", pokeNameData.sprites.front_default);
+      imgElement.setAttribute("alt", dataTypes);
+    });
 };
 // Removed old Data from past seach
 function resetScreen() {
-    //need to fill 
-    abilities.innerHTML = "";
+  //need to fill
+  abilities.innerHTML = "";
 }
 
 // Display Name Function - Youre doing this one Austin // I updated this to make sure it was printing correctly
 let pokeDiv = document.getElementById("pokeDetails");
-let getPokeName = function() {
-    pokeDiv.classList.add("font-bold", "text-xl", "mb-2");
-    var pTag = document.createElement("p");
-    pTag.setAttribute("id", "pokename");
-    pTag.textContent = "Name: ";
-    console.log(pTag);
-    //pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
-    //append html to display name
-    pokeDiv.append(pTag);
+let getPokeName = function () {
+  pokeDiv.classList.add("font-bold", "text-xl", "mb-2");
+  var pTag = document.createElement("p");
+  pTag.setAttribute("id", "pokename");
+  pTag.textContent = "Name: ";
+  console.log(pTag);
+  //pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
+  //append html to display name
+  pokeDiv.append(pTag);
 };
 
 //End of Austin work
@@ -81,35 +79,37 @@ let getPokeName = function() {
 
 // Fetch Abilities Function -- Jem
 
+var fetchPokeAbility = function (pokeName) {
+  var pokeAbilityURL = "https://pokeapi.co/api/v2/pokemon/" + pokeName;
+  fetch(pokeAbilityURL)
+    .then(function (pokeAbilityResponse) {
+      return pokeAbilityResponse.json();
+    })
+    .then(function (pokeAbilityData) {
+      console.log("pokeAbilityData", pokeAbilityData);
+      //resetScreen();
 
-
-var fetchPokeAbility = function(pokeName) {
-    var pokeAbilityURL = "https://pokeapi.co/api/v2/pokemon/" + pokeName;
-    fetch(
-            pokeAbilityURL
-        )
-        .then(function(pokeAbilityResponse) {
-            return pokeAbilityResponse.json();
-        })
-        .then(function(pokeAbilityData) {
-            console.log("pokeAbilityData", pokeAbilityData)
-                //resetScreen();
-
-            var dataAbility = pokeAbilityData.abilities;
-            var dataFirstAbility = dataAbility[0];
-            var dataSecondAbility = dataAbility[1];
-            console.log("first", dataFirstAbility, dataSecondAbility);
-            //createElement
-            var liTag = document.createElement("li");
-            liTag.textContent = dataFirstAbility.ability.name;
-            //append it to ul List 
-            abilitiesList.append(liTag);
-            //createElement
-            var liTag2 = document.createElement("li");
-            liTag2.textContent = dataSecondAbility.ability.name;
-            //append it to ul List 
-            abilitiesList.append(liTag2);
-            /*
+      var dataAbility = pokeAbilityData.abilities;
+      var dataFirstAbility = dataAbility[0];
+      var dataSecondAbility = dataAbility[1];
+      var dataThirdAbility = dataAbility[2];
+      console.log("first", dataFirstAbility, "second", dataSecondAbility);
+      //createElement
+      var liTag = document.createElement("li");
+      liTag.textContent = dataFirstAbility.ability.name;
+      //append it to ul List
+      abilitiesList.append(liTag);
+      //createElement
+      var liTag2 = document.createElement("li");
+      liTag2.textContent = dataSecondAbility.ability.name;
+      //append it to ul List
+      abilitiesList.append(liTag2);
+      //createElement
+      var liTag3 = document.createElement("li");
+      liTag3.textContent = dataThirdAbility.ability.name;
+      //append it to ul List
+      abilitiesList.append(liTag3);
+      /*
             pokeAbilityOne.textContent = capitalize(dataFirstAbility['ability']);
             if (dataSecondType) {
                 pokeAbilityTwo.classList.remove('hide');
@@ -125,10 +125,8 @@ var fetchPokeAbility = function(pokeName) {
             pokeFrontImage.src = data['sprites']['front_default'] || '';
             pokeBackImage.src = data['sprites']['back_default'] || '';
             */
-        });
+    });
 };
-
-
 
 // Display Abilities function -- Andy
 
@@ -159,7 +157,6 @@ function buttonClickhandler(event) {
 const btn= document.querySelector('.btn');
 btn.addEventListener('click', buttonClickhandler); */
 //}
-
 
 // var formSubmitHandler = function(event) {
 //     event.preventDefault();
@@ -194,8 +191,6 @@ btn.addEventListener('click', buttonClickhandler); */
 //     searchArrray =
 // }
 
-
-
 // var loadHistory = function() {
 //     searchArray = JSON.parse(localStorage.getItem("weatherSearch"));
 
@@ -215,11 +210,13 @@ btn.addEventListener('click', buttonClickhandler); */
 
 //loadHistory();
 
-//on page load call the functions 
+//on page load call the functions
 //fetchPokeData();
 var btnGen = document.getElementById("btnGenerate");
-btnGen.addEventListener("click", function() {
-    var searchText = document.getElementById("charcterName").value;
+btnGen.addEventListener("click", function () {
+  var searchText = document.getElementById("charcterName").value;
+  var showData = document.getElementById("invisible");
+  showData.classList.remove("invisible");
 
-    fetchPokeData(searchText);
+  fetchPokeData(searchText);
 });
