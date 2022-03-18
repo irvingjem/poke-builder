@@ -39,8 +39,11 @@ let getPokeName = function () {
   var pTag = document.createElement("p");
   pTag.setAttribute("id", "pokename");
   pTag.textContent = "Name: ";
-  console.log(pTag);  
-  
+
+  console.log(pTag);
+  //pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
+  //append html to display name
+
   pokeDiv.append(pTag);
 };
 
@@ -80,6 +83,7 @@ var fetchPokeAbility = function (pokeName) {
       var liTag3 = document.createElement("li");
       liTag3.textContent = dataThirdAbility.ability.name;
       //append it to ul List
+
       abilitiesList.append(liTag3);      
         });
     };
