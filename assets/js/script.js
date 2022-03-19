@@ -33,6 +33,7 @@ function resetScreen() {
 }
 
 // Display Name Function -
+
 let pokeDiv = document.getElementById("pokeDetails");
 let getPokeName = function () {
   pokeDiv.classList.add("font-bold", "text-xl", "mb-2");
@@ -90,9 +91,9 @@ var fetchPokeAbility = function (pokeName) {
         dataThirdAbility.ability.name.slice(1);
       //append it to ul List
 
-      abilitiesList.append(liTag3);
-    });
-};
+      abilitiesList.append(liTag3);      
+        });
+    };
 
 // Save local | load local (last priority) | Delete Local
 
