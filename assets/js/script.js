@@ -40,15 +40,24 @@ let getPokeName = function () {
   var pTag = document.createElement("p");
   pTag.setAttribute("id", "pokename");
   pTag.textContent = "Name: ";
-
   console.log(pTag);
-  //pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
-  //append html to display name
-
   pokeDiv.append(pTag);
 };
 
 getPokeName();
+
+// Nickname Randomizer
+function getNameGen() {
+  var nameGenApi = "https://namey.muffinlabs.com/name.json?frequency=rare";
+  fetch(nameGenApi)
+    .then(function (nameResponse) {
+      return nameResponse.json();
+    })
+    .then(function (nameData) {
+      console.log("random name", nameData[0]);
+      pokeDiv.append("(" + nameData[0] + ")");
+    });
+}
 
 // Fetch Abilities Function -- Jem
 
@@ -130,18 +139,11 @@ submitListener.addEventListener("submit", function (event) {
   var searchText = document.getElementById("characterName").value;
   var showData = document.getElementById("invisible");
   showData.classList.remove("invisible");
-  fetchPokeData(searchText);
-  characterName.value = "";
+  if (document.getElementById("renamePokemon").checked) {
+    getNameGen();
+    fetchPokeData(searchText);
+  } else {
+    fetchPokeData(searchText);
+    characterName.value = "";
+  }
 });
-
-function getNameGen() {
-  var nameGenApi = "https://namey.muffinlabs.com/name.json?frequency=rare";
-  fetch(nameGenApi)
-    .then(function (nameResponse) {
-      return nameResponse.json();
-    })
-    .then(function (nameData) {
-      console.log("random name", nameData);
-    });
-}
-getNameGen();
