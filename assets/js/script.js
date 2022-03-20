@@ -40,15 +40,24 @@ let getPokeName = function () {
   var pTag = document.createElement("p");
   pTag.setAttribute("id", "pokename");
   pTag.textContent = "Name: ";
-
   console.log(pTag);
-  //pokeDiv.innerHTML = 'Name: <p id="pokename"></p>';
-  //append html to display name
-
   pokeDiv.append(pTag);
 };
 
 getPokeName();
+
+// Nickname Randomizer
+function getNameGen() {
+  var nameGenApi = "https://namey.muffinlabs.com/name.json?frequency=rare";
+  fetch(nameGenApi)
+    .then(function (nameResponse) {
+      return nameResponse.json();
+    })
+    .then(function (nameData) {
+      console.log("random name", nameData[0]);
+      pokeDiv.append("(" + nameData[0] + ")");
+    });
+}
 
 // Fetch Abilities Function -- Jem
 
@@ -91,9 +100,9 @@ var fetchPokeAbility = function (pokeName) {
         dataThirdAbility.ability.name.slice(1);
       //append it to ul List
 
-      abilitiesList.append(liTag3);      
-        });
-    };
+      abilitiesList.append(liTag3);
+    });
+};
 
 // Save local | load local (last priority) | Delete Local
 
@@ -122,21 +131,19 @@ var fetchPokeAbility = function (pokeName) {
 
 //on page load call the functions
 //fetchPokeData();
-var btnGen = document.getElementById("btnGenerate");
-btnGen.addEventListener("click", function () {
-  var searchText = document.getElementById("characterName").value;
-  var showData = document.getElementById("invisible");
-  showData.classList.remove("invisible");
-  fetchPokeData(searchText);
-  characterName.value = "";
-});
-var enterKey = document.getElementById("enterListener");
-function enterSubmit(event) {
+
+// form listener for generate click/submit
+var submitListener = document.getElementById("submitListener");
+submitListener.addEventListener("submit", function (event) {
   event.preventDefault();
   var searchText = document.getElementById("characterName").value;
   var showData = document.getElementById("invisible");
   showData.classList.remove("invisible");
-  fetchPokeData(searchText);
-  characterName.value = "";
-}
-enterKey.addEventListener("submit", enterSubmit);
+  if (document.getElementById("renamePokemon").checked) {
+    getNameGen();
+    fetchPokeData(searchText);
+  } else {
+    fetchPokeData(searchText);
+    characterName.value = "";
+  }
+});
