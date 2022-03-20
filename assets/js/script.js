@@ -91,9 +91,9 @@ var fetchPokeAbility = function (pokeName) {
         dataThirdAbility.ability.name.slice(1);
       //append it to ul List
 
-      abilitiesList.append(liTag3);      
-        });
-    };
+      abilitiesList.append(liTag3);
+    });
+};
 
 // Save local | load local (last priority) | Delete Local
 
@@ -122,21 +122,26 @@ var fetchPokeAbility = function (pokeName) {
 
 //on page load call the functions
 //fetchPokeData();
-var btnGen = document.getElementById("btnGenerate");
-btnGen.addEventListener("click", function () {
-  var searchText = document.getElementById("characterName").value;
-  var showData = document.getElementById("invisible");
-  showData.classList.remove("invisible");
-  fetchPokeData(searchText);
-  characterName.value = "";
-});
-var enterKey = document.getElementById("enterListener");
-function enterSubmit(event) {
+
+// form listener for generate click/submit
+var submitListener = document.getElementById("submitListener");
+submitListener.addEventListener("submit", function (event) {
   event.preventDefault();
   var searchText = document.getElementById("characterName").value;
   var showData = document.getElementById("invisible");
   showData.classList.remove("invisible");
   fetchPokeData(searchText);
   characterName.value = "";
+});
+
+function getNameGen() {
+  var nameGenApi = "https://namey.muffinlabs.com/name.json?frequency=rare";
+  fetch(nameGenApi)
+    .then(function (nameResponse) {
+      return nameResponse.json();
+    })
+    .then(function (nameData) {
+      console.log("random name", nameData);
+    });
 }
-enterKey.addEventListener("submit", enterSubmit);
+getNameGen();
