@@ -10,13 +10,13 @@ var fetchPokeData = function (pokeName) {
       return pokeNameResponse.json();
     })
     .then(function (pokeNameData) {
-      console.log("pokeNameData", pokeNameData);
+      console.log("pokeNameData", pokeNameData.name);
       resetScreen();
 
       //setting up the character name
       var dataTypes = pokeNameData["name"];
-      document.getElementById("pokename").textContent = "Name: " + dataTypes;
-
+      document.getElementById("pokename").textContent =
+        "Name: " + dataTypes[0].toUpperCase() + dataTypes.substring(1);
       //Calling the ability fetch based on the character name data
       fetchPokeAbility(dataTypes);
 
@@ -32,7 +32,8 @@ function resetScreen() {
   abilities.innerHTML = "";
 }
 
-// Display Name Function - 
+// Display Name Function -
+
 let pokeDiv = document.getElementById("pokeDetails");
 let getPokeName = function () {
   pokeDiv.classList.add("font-bold", "text-xl", "mb-2");
@@ -47,10 +48,7 @@ let getPokeName = function () {
   pokeDiv.append(pTag);
 };
 
-
-getPokeName(); //
-
-//End Austin note
+getPokeName();
 
 // Fetch Abilities Function -- Jem
 
@@ -61,27 +59,36 @@ var fetchPokeAbility = function (pokeName) {
       return pokeAbilityResponse.json();
     })
     .then(function (pokeAbilityData) {
-      console.log("pokeAbilityData", pokeAbilityData);
       //resetScreen();
 
       var dataAbility = pokeAbilityData.abilities;
+      console.log("pokeAbilityData", pokeAbilityData.abilities);
       var dataFirstAbility = dataAbility[0];
       var dataSecondAbility = dataAbility[1];
       var dataThirdAbility = dataAbility[2];
       console.log("first", dataFirstAbility, "second", dataSecondAbility);
       //createElement
       var liTag = document.createElement("li");
-      liTag.textContent = dataFirstAbility.ability.name;
+      liTag.textContent =
+        // a lot of code to capitalize the first letter
+        dataFirstAbility.ability.name.charAt(0).toUpperCase() +
+        dataFirstAbility.ability.name.slice(1);
       //append it to ul List
       abilitiesList.append(liTag);
       //createElement
       var liTag2 = document.createElement("li");
-      liTag2.textContent = dataSecondAbility.ability.name;
+      liTag2.textContent =
+        // a lot of code to capitalize the first letter
+        dataSecondAbility.ability.name.charAt(0).toUpperCase() +
+        dataSecondAbility.ability.name.slice(1);
       //append it to ul List
       abilitiesList.append(liTag2);
       //createElement
       var liTag3 = document.createElement("li");
-      liTag3.textContent = dataThirdAbility.ability.name;
+      liTag3.textContent =
+        // a lot of code to capitalize the first letter
+        dataThirdAbility.ability.name.charAt(0).toUpperCase() +
+        dataThirdAbility.ability.name.slice(1);
       //append it to ul List
 
       abilitiesList.append(liTag3);      
