@@ -2,6 +2,7 @@
 var abilitiesList = document.getElementById("abilities");
 let pokeNickname = document.getElementById("pokeNickname");
 let pokeDiv = document.getElementById("pokeDetails");
+var submitListener = document.getElementById("submitListener");
 let saveBtn = document.getElementById("saveBtn");
 let deleteBtn = document.getElementById("deleteBtn");
 var pokeSearchesArray = [];
@@ -16,13 +17,6 @@ var fetchPokeData = function (pokeName) {
     })
     .then(function (pokeNameData) {
       console.log("pokeNameData", pokeNameData.name);
-      if (pokeSearchesArray.indexOf(pokeNameData.name) === -1) {
-        pokeSearchesArray.push(pokeNameData.name);
-        localStorage.setItem(
-          "Search History",
-          JSON.stringify(pokeSearchesArray)
-        );
-      }
       resetScreen();
 
       //setting up the character name
@@ -110,13 +104,20 @@ var fetchPokeAbility = function (pokeName) {
 };
 
 // Save local | load local (last priority) | Delete Local
+saveBtn.addEventListener("click", function savePokemon() {
+  console.log(pokeDiv);
+  if (pokeSearchesArray.indexOf(pokeDiv) === -1) {
+    pokeSearchesArray.push(pokeDiv);
+    localStorage.setItem("Search History", JSON.stringify(pokeSearchesArray));
+  }
+});
 
 // var loadHistory = function() {
-//     searchArray = JSON.parse(localStorage.getItem("pokeSearch"));
+//     searchArray = JSON.parse(localStorage.getItem("Search History"));
 
 //     if (searchArray) {
-//         searchHistoryArray = JSON.parse(localStorage.getItem("weatherSearch"));
-//         for (let i = 0; i < searchArray.length; i++) {
+//         searchHistoryArray = JSON.parse(localStorage.getItem("Search History"));
+//         for (let i = 0; i < 6; i++) {
 //             var searchHistoryEl = document.createElement('button');
 //             searchHistoryEl.className = "btn";
 //             searchHistoryEl.setAttribute("data-city", searchArray[i])
@@ -130,8 +131,6 @@ var fetchPokeAbility = function (pokeName) {
 
 //loadHistory();
 
-// form listener for generate click/submit
-var submitListener = document.getElementById("submitListener");
 submitListener.addEventListener("submit", function (event) {
   event.preventDefault();
   var searchText = document.getElementById("characterName").value;
