@@ -1,5 +1,10 @@
 // Global Variables
 var abilitiesList = document.getElementById("abilities");
+let pokeNickname = document.getElementById("pokeNickname");
+let pokeDiv = document.getElementById("pokeDetails");
+let saveBtn = document.getElementById("saveBtn");
+let deleteBtn = document.getElementById("deleteBtn");
+var pokeSearchesArray = [];
 
 // Grab pokemon name / and image
 var fetchPokeData = function (pokeName) {
@@ -11,6 +16,13 @@ var fetchPokeData = function (pokeName) {
     })
     .then(function (pokeNameData) {
       console.log("pokeNameData", pokeNameData.name);
+      if (pokeSearchesArray.indexOf(pokeNameData.name) === -1) {
+        pokeSearchesArray.push(pokeNameData.name);
+        localStorage.setItem(
+          "Search History",
+          JSON.stringify(pokeSearchesArray)
+        );
+      }
       resetScreen();
 
       //setting up the character name
@@ -31,10 +43,7 @@ function resetScreen() {
   //need to fill
   abilities.innerHTML = "";
 }
-
 // Display Name Function -
-
-let pokeDiv = document.getElementById("pokeDetails");
 let getPokeName = function () {
   pokeDiv.classList.add("font-bold", "text-xl", "mb-2");
   var pTag = document.createElement("p");
@@ -43,9 +52,7 @@ let getPokeName = function () {
   console.log(pTag);
   pokeDiv.append(pTag);
 };
-
 getPokeName();
-
 // Nickname Randomizer
 function getNameGen() {
   var nameGenApi = "https://namey.muffinlabs.com/name.json?frequency=rare";
@@ -55,8 +62,9 @@ function getNameGen() {
     })
     .then(function (nameData) {
       console.log("random name", nameData[0]);
-      pokeDiv.append("(" + nameData[0] + ")");
+      pokeNickname.append("(" + nameData[0] + ")");
     });
+  pokeNickname.textContent = "";
 }
 
 // Fetch Abilities Function -- Jem
@@ -68,8 +76,6 @@ var fetchPokeAbility = function (pokeName) {
       return pokeAbilityResponse.json();
     })
     .then(function (pokeAbilityData) {
-      //resetScreen();
-
       var dataAbility = pokeAbilityData.abilities;
       console.log("pokeAbilityData", pokeAbilityData.abilities);
       var dataFirstAbility = dataAbility[0];
@@ -99,7 +105,6 @@ var fetchPokeAbility = function (pokeName) {
         dataThirdAbility.ability.name.charAt(0).toUpperCase() +
         dataThirdAbility.ability.name.slice(1);
       //append it to ul List
-
       abilitiesList.append(liTag3);
     });
 };
@@ -107,11 +112,7 @@ var fetchPokeAbility = function (pokeName) {
 // Save local | load local (last priority) | Delete Local
 
 // var loadHistory = function() {
-//     searchArrray =
-// }
-
-// var loadHistory = function() {
-//     searchArray = JSON.parse(localStorage.getItem("weatherSearch"));
+//     searchArray = JSON.parse(localStorage.getItem("pokeSearch"));
 
 //     if (searchArray) {
 //         searchHistoryArray = JSON.parse(localStorage.getItem("weatherSearch"));
@@ -128,9 +129,6 @@ var fetchPokeAbility = function (pokeName) {
 // }
 
 //loadHistory();
-
-//on page load call the functions
-//fetchPokeData();
 
 // form listener for generate click/submit
 var submitListener = document.getElementById("submitListener");
