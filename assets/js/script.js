@@ -1,10 +1,12 @@
 // Global Variables
 var abilitiesList = document.getElementById("abilities");
 let pokeNickname = document.getElementById("pokeNickname");
+//let characterName = document.getElementById('characterName')
 let pokeDiv = document.getElementById("pokeDetails");
 var submitListener = document.getElementById("submitListener");
 let saveBtn = document.getElementById("saveBtn");
 let deleteBtn = document.getElementById("deleteBtn");
+let storedPoke = localStorage.getItem('searchHistory')
 var pokeSearchesArray = [];
 
 // Grab pokemon name / and image
@@ -104,19 +106,42 @@ var fetchPokeAbility = function (pokeName) {
 };
 
 // Save local | load local (last priority) | Delete Local
-saveBtn.addEventListener("click", function savePokemon() {
-  console.log(pokeDiv);
-  if (pokeSearchesArray.indexOf(pokeDiv) === -1) {
-    pokeSearchesArray.push(pokeDiv);
-    localStorage.setItem("Search History", JSON.stringify(pokeSearchesArray));
+// saveBtn.addEventListener("click", function savePokemon() {
+//   console.log(pokeDiv);
+//   if (pokeSearchesArray.indexOf(pokeDiv) === -1) {
+//     pokeSearchesArray.push(pokeDiv);
+//     localStorage.setItem("searchHistory", pokename.textContent);
+//   }
+// });
+
+function savePokemon() {
+  //grab pokename from textbox
+  let new_pokename = document.getElementById("characterName").value;  
+    //adds previous queries into localStorage
+    localStorage.setItem('pokemonSearchesArray', '[]')
+    //add previous pokenames to existing array
+    let old_pokename = JSON.parse(localStorage.getItem('pokemonSearchesArray'))
+    old_pokename.push(new_pokename)
+  
+    localStorage.setItem('pokemonSearchesArray', JSON.stringify(old_pokename))
+    //savePokemon.textContent = "";
+};
+
+function viewPokmon() {
+  if(localStorage.getItem('pokemonSearchesArray') != null) {
+    document.getElementById('searchHistory').innerHTML = JSON.parse(localStorage.getItem('pokemonSearchesArray'))
   }
-});
+}
+
+// if(storedPoke) {
+//   pokename.textContent = storedPoke
+// }
 
 // var loadHistory = function() {
-//     searchArray = JSON.parse(localStorage.getItem("Search History"));
+//     searchArray = JSON.parse(localStorage.getItem("searchHistory"));
 
 //     if (searchArray) {
-//         searchHistoryArray = JSON.parse(localStorage.getItem("Search History"));
+//         searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory"));
 //         for (let i = 0; i < 6; i++) {
 //             var searchHistoryEl = document.createElement('button');
 //             searchHistoryEl.className = "btn";
@@ -129,7 +154,7 @@ saveBtn.addEventListener("click", function savePokemon() {
 //     }
 // }
 
-//loadHistory();
+// loadHistory();
 
 submitListener.addEventListener("submit", function (event) {
   event.preventDefault();
