@@ -60,7 +60,7 @@ function getNameGen() {
       console.log("random name", nameData[0]);
       pokeNickname.append("(" + nameData[0] + ")");
     });
-  pokeNickname.textContent = "";
+    pokeNickname.textContent = "";
 }
 
 // Fetch Abilities Function -- Jem
@@ -113,46 +113,51 @@ var fetchPokeAbility = function (pokeName) {
 //     localStorage.setItem("searchHistory", pokename.textContent);
 //   }
 // });
-
+//save pokemon function
 function savePokemon() {
   //grab pokename from textbox
   let new_pokename = document.getElementById("characterName").value;  
     //adds previous queries into localStorage
+    if(localStorage.getItem('pokemonSearchesArray') == null) {
     localStorage.setItem('pokemonSearchesArray', '[]')
+    }
     //add previous pokenames to existing array
     let old_pokename = JSON.parse(localStorage.getItem('pokemonSearchesArray'))
     old_pokename.push(new_pokename)
-  
-    localStorage.setItem('pokemonSearchesArray', JSON.stringify(old_pokename))
-    //savePokemon.textContent = "";
+    //output entire array to localStorage  
+    localStorage.setItem('pokemonSearchesArray', JSON.stringify(old_pokename))    
 };
 
-function viewPokmon() {
-  if(localStorage.getItem('pokemonSearchesArray') != null) {
-    document.getElementById('searchHistory').innerHTML = JSON.parse(localStorage.getItem('pokemonSearchesArray'))
-  }
-}
+//show the pokemon save in searches array
+
+
+//view saved pokemon function
+// function viewPokemon() {
+//   if(localStorage.getItem('pokemonSearchesArray') != null) {
+//     document.getElementById('searchHistory').innerHTML = savePokemon.textContent = "";
+//   }
+// }
 
 // if(storedPoke) {
 //   pokename.textContent = storedPoke
 // }
 
-// var loadHistory = function() {
-//     searchArray = JSON.parse(localStorage.getItem("searchHistory"));
+var loadHistory = function() {
+    searchArray = JSON.parse(localStorage.getItem("pokemonSearchesArray"));
 
-//     if (searchArray) {
-//         searchHistoryArray = JSON.parse(localStorage.getItem("searchHistory"));
-//         for (let i = 0; i < 6; i++) {
-//             var searchHistoryEl = document.createElement('button');
-//             searchHistoryEl.className = "btn";
-//             searchHistoryEl.setAttribute("data-city", searchArray[i])
-//             searchHistoryEl.innerHTML = searchArray[i];
-//             historyButtonsEl.appendChild(searchHistoryEl);
-//             historyCardEl.removeAttribute("style");
-//         }
+    if (searchArray) {
+        searchHistoryArray = JSON.parse(localStorage.getItem("pokemonSearchesArray"));
+        for (let i = 0; i < 6; i++) {
+            var searchHistoryEl = document.createElement('button');
+            searchHistoryEl.className = "btn";
+            searchHistoryEl.setAttribute("data-city", searchArray[i])
+            searchHistoryEl.innerHTML = searchArray[i];
+            historyButtonsEl.appendChild(searchHistoryEl);
+            historyCardEl.removeAttribute("style");
+        }
 
-//     }
-// }
+    }
+};
 
 // loadHistory();
 
