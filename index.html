@@ -5,57 +5,79 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokemon Generator</title>
+    <!--tab label-->
+    <title>PokeBuilder</title>
+    <!--tab icon-->
+    <link rel="icon" href="./assets/images/pikachu.png" />
     <!-- tailwind css link -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <!-- Content -->
-<!-- testing out Tailwind CSS -->
 
 <body class="mx-5">
-    <div class="container mx-auto items-center justify-center lg:mt-8 lg:w-1/4">
+    <div class="container mx-auto items-center justify-center mt-8 lg:w-1/4">
         <img class="" src="./assets/images/2560px-International_Pokémon_logo.svg.png" alt="pokemon-logo" />
     </div>
-    <main class="max-w-md container mx-auto items-center justify-center">
-        <div class="text-center">
-            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span class="block xl:inline text-yellow-400">Generate</span>
-                <span class="block text-blue-600 xl:inline">Pokemon!</span>
-            </h1>
-            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Rainbow Badge Gothita Soul Badge Gabite Manaphy Granbull Ninetales. Flying Mothim Deino Satoshi Tajiri Pokemon The Movie 2000 Palpitoad Clefairy.
-            </p>
-            <form id="enterListener" class="w-full mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div>
-                    <input type="text" class="shadow appearance-none border-rounded w-full py-2 px-3 text-gray-700" placeholder="Enter the pokemon name" id="characterName" />
-                    <button type="button" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-900 bg-indigo-300 hover:bg-indigo-500 md:py-4 md:text-lg md:px-10" id="btnGenerate">Generate</button>
+    <main class="text-center max-w-md container mx-auto items-center justify-center">
+        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+            <span class="block xl:inline text-yellow-400">Generate</span>
+            <span class="block text-blue-600 xl:inline">Pokemon!</span>
+        </h1>
+        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+            Pokemon The Movie 2000 Eelektross Gastly Swellow Celadon City Forretress Illumise. The Power Of One Cherubi Baltoy Kadabra Dustox gotta catch 'em all Nosepass.
+        </p>
+        <form id="submitListener" class="mb-3">
+            <input type="text" class="shadow text-center appearance-none w-full my-3 py-2 px-3 text-gray-700 placeholder:italic" placeholder="Enter the Pokemon name" required="" id="characterName" />
+            <div class="mb-3 sm:grid sm:grid-cols-3 sm:gap-2">
+                <div class="mt-3 sm:mt-0">
+                    <button class="w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-900 bg-indigo-300 hover:bg-indigo-400 md:py-4 md:text-lg md:px-10" id="btnGenerate">
+              Generate
+            </button>
                 </div>
-                <div class="mt-3 sm:mt-0 sm:ml-3">
-                    <button href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-700 bg-yellow-100 hover:bg-yellow-200 md:py-4 md:text-lg md:px-10">Save</button>
+                <div class="sm:order-first mt-3 sm:mt-0">
+                    <button type="button" href="#" class="w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-800 bg-yellow-200 hover:bg-yellow-300 md:py-4 md:text-lg md:px-10" id="saveBtn">
+              Save
+            </button>
                 </div>
-                <div class="mt-3 sm:mt-0 sm:ml-3">
-                    <button href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white-500 bg-red-400 hover:bg-red-500 md:py-4 md:text-lg md:px-10">Delete</button>
+                <div class="mt-3 sm:mt-0">
+                    <button type="button" href="#" class="w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-500 bg-red-400 hover:bg-red-500 md:py-4 md:text-lg md:px-10" id="deleteBtn">
+              Delete
+            </button>
                 </div>
-            </form>
-        </div>
+            </div>
+            <label class="text-gray-500 font-bold">
+          <input
+            class="mr-2 leading-tight"
+            type="checkbox"
+            id="renamePokemon"
+          />
+          <span class="text-sm"
+            >Do you want to give your Pokemon a Random Nickname?</span
+          >
+        </label>
+        </form>
     </main>
-    </div>
-    </div>
-
-    </div>
-    </div>
     <!-- stacked card -->
-    <!--Pokemon Name Container Object-->
-    <div id="invisible" class="invisible max-w-md container mx-auto items-center justify-center">
+    <!--Pokemon Name, Image & Details-->
+    <div id="invisible" class="mt-8 invisible max-w-md container mx-auto text-center justify-center">
+        <div id="pokeDetails" class="w-full font-bold text-xl mb-2"></div>
+        <div id="pokeNickname" class="w-full font-semibold font-style: italic text-xl mb-2"></div>
+        <ul id="abilities"></ul>
         <img id="charcterImg" class="w-full" src="" alt="pokemom-logo" />
-        <div id="pokeDetails" class="w-full font-bold text-xl mb-2">
-
-        </div>
-
-        <ul id="abilities">
-        </ul>
     </div>
-    <script src="./assets/js/script.js"></script>
+    <div class="justify-space-between w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md">
+        <div>
+            <div class="card" id="history" style="display: none;">
+                <h3>Search History
+                </h3>
+                <div id="history-buttons">
+
+                </div>
+
+            </div>
+        </div>
+        <!-- link to javascript file -->
+        <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
