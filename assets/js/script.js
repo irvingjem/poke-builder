@@ -9,6 +9,8 @@ var historyButtonsEl = document.getElementById("history-buttons");
 var historyCardEl = document.getElementById("history");
 var pokeSearchesArray = [];
 
+
+
 // Grab pokemon name / and image
 var fetchPokeData = function(pokeName) {
     var pokeNameURL =
