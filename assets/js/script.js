@@ -115,6 +115,7 @@ var fetchPokeAbility = function (pokeName) {
 // });
 //save pokemon function
 function savePokemon() {
+  
   //grab pokename from textbox
   let new_pokename = document.getElementById("characterName").value;  
     //adds previous queries into localStorage
