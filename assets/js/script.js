@@ -1,15 +1,15 @@
 // Global Variables
 var abilitiesList = document.getElementById("abilities");
 let pokeNickname = document.getElementById("pokeNickname");
-//let characterName = document.getElementById('characterName')
 let pokeDiv = document.getElementById("pokeDetails");
 var submitListener = document.getElementById("submitListener");
-let saveBtn = document.getElementById("saveBtn");
+var saveListener = document.getElementById("saveListener");
+var deleteListener = document.getElementById("deleteListener");
 let deleteBtn = document.getElementById("deleteBtn");
-let storedPoke = localStorage.getItem('searchHistory')
-var historyButtonsEl = document.getElementById("history-buttons");
-var historyCardEl = document.getElementById("history");
-var pokeSearchesArray = [];
+let storedPoke = localStorage.getItem('searchHistory');
+var historyButtonsEl = document.getElementById("searchHistory");
+var pokeSearchesArray = JSON.parse(localStorage.getItem("Search History")) || [];
+console.log(pokeSearchesArray);
 
 // Grab pokemon name / and image
 var fetchPokeData = function(pokeName) {
@@ -23,6 +23,8 @@ var fetchPokeData = function(pokeName) {
             console.log("pokeNameData", pokeNameData.name);
             resetScreen();
 
+            // Save local to storage 
+            savePokemon(pokeNameData.name);
             //setting up the character name
             var dataTypes = pokeNameData["name"];
             document.getElementById("pokename").textContent =
@@ -35,19 +37,24 @@ var fetchPokeData = function(pokeName) {
             imgElement.setAttribute("src", pokeNameData.sprites.front_default);
             imgElement.setAttribute("alt", dataTypes);
 
-            // Save local
-            saveBtn.addEventListener("click", function savePokemon() {
-                console.log(pokeNameData.name);
-                if (pokeSearchesArray.indexOf(pokeNameData.name) === -1) {
-                    pokeSearchesArray.push(pokeNameData.name);
-                    localStorage.setItem(
-                        "Search History",
-                        JSON.stringify(pokeSearchesArray)
-                    );
-                }
-            });
+
         });
 };
+
+function savePokemon(pokeName) {
+    console.log("save btn", pokeName);
+    if (pokeSearchesArray.indexOf(pokeName) === -1) {
+        pokeSearchesArray.push(pokeName);
+        localStorage.setItem(
+            "Search History",
+            JSON.stringify(pokeSearchesArray)
+        );
+
+        //reload search history 
+        loadHistory();
+    }
+}
+
 // Removed old Data from past seach
 function resetScreen() {
     //need to fill
@@ -65,15 +72,15 @@ getPokeName();
 // Nickname Randomizer
 function getNameGen() {
 
-  var nameGenApi = "https://namey.muffinlabs.com/name.json?frequency=rare";
-  fetch(nameGenApi)
-    .then(function (nameResponse) {
-      return nameResponse.json();
-    })
-    .then(function (nameData) {
-      console.log("random name", nameData[0]);
-      pokeNickname.append("(" + nameData[0] + ")");
-    });
+    var nameGenApi = "https://namey.muffinlabs.com/name.json?frequency=rare";
+    fetch(nameGenApi)
+        .then(function(nameResponse) {
+            return nameResponse.json();
+        })
+        .then(function(nameData) {
+            console.log("random name", nameData[0]);
+            pokeNickname.append("(" + nameData[0] + ")");
+        });
 
     pokeNickname.textContent = "";
 }
@@ -119,44 +126,44 @@ var fetchPokeAbility = function(pokeName) {
             abilitiesList.append(liTag3);
         });
 };
-
-// Save local | load local (last priority) | Delete Local
-// saveBtn.addEventListener("click", function savePokemon() {
-//   console.log(pokeDiv);
-//   if (pokeSearchesArray.indexOf(pokeDiv) === -1) {
-//     pokeSearchesArray.push(pokeDiv);
-//     localStorage.setItem("searchHistory", pokename.textContent);
-//   }
-// });
-//save pokemon function
-function savePokemon() {
-  
-  //grab pokename from textbox
-  let new_pokename = document.getElementById("characterName").value;  
-    //adds previous queries into localStorage
-    if(localStorage.getItem('pokemonSearchesArray') == null) {
-    localStorage.setItem('pokemonSearchesArray', '[]')
-    }
-    //add previous pokenames to existing array
-    let old_pokename = JSON.parse(localStorage.getItem('pokemonSearchesArray'))
-    old_pokename.push(new_pokename)
-    //output entire array to localStorage  
-    localStorage.setItem('pokemonSearchesArray', JSON.stringify(old_pokename))    
-};
-
 //show the pokemon save in searches array
 
 
-//view saved pokemon function
-// function viewPokemon() {
-//   if(localStorage.getItem('pokemonSearchesArray') != null) {
-//     document.getElementById('searchHistory').innerHTML = savePokemon.textContent = "";
-//   }
-// }
+// view saved pokemon function
+function viewPokemon() {
+    if (localStorage.getItem('pokemonSearchesArray') != null) {
+        document.getElementById('searchHistory').innerHTML = savePokemon.textContent = "";
+    }
+}
 
-// if(storedPoke) {
-//   pokename.textContent = storedPoke
-// }
+if (storedPoke) {
+    pokename.textContent = storedPoke
+};
+
+var loadHistory = function() {
+    //pokeSearchesArray = JSON.parse(localStorage.getItem("Search History"));
+    console.log(pokeSearchesArray, pokeSearchesArray.length);
+    var loopCOunt = 0;
+    //reset the li tags 
+    historyButtonsEl.innerHTML = "";
+
+    if (pokeSearchesArray) {
+        //searchHistoryArray = JSON.parse(localStorage.getItem("Search History"));
+        if (pokeSearchesArray.length > 6) {
+            loopCOunt = 6
+        } else {
+            loopCOunt = pokeSearchesArray.length;
+        }
+        for (let i = 0; i < loopCOunt; i++) {
+            var searchHistoryEl = document.createElement("li");
+            searchHistoryEl.className = "btn";
+            searchHistoryEl.setAttribute("data-pokemon", pokeSearchesArray[i]);
+            searchHistoryEl.innerHTML = pokeSearchesArray[i];
+            historyButtonsEl.appendChild(searchHistoryEl);
+            //historyCardEl.removeAttribute("style");
+        }
+    }
+};
 
 
 submitListener.addEventListener("submit", function(event) {
@@ -174,20 +181,30 @@ submitListener.addEventListener("submit", function(event) {
     }
 });
 
-var loadHistory = function() {
-    pokeSearchesArray = JSON.parse(localStorage.getItem("Search History"));
-    if (pokeSearchesArray) {
-        searchHistoryArray = JSON.parse(localStorage.getItem("Search History"));
-        for (let i = 0; i < 6; i++) {
-            var searchHistoryEl = document.createElement("button");
-            searchHistoryEl.className = "btn";
-            searchHistoryEl.setAttribute("data-pokemon", pokeSearchesArray[i]);
-            searchHistoryEl.innerHTML = pokeSearchesArray[i];
-            historyButtonsEl.appendChild(searchHistoryEl);
-            historyCardEl.removeAttribute("style");
-        }
-    }
-};
+saveListener.addEventListener("click", function(event) {
+    event.preventDefault();
 
+    var searchText = document.getElementById("characterName").value;
+    // var showData = document.getElementById("invisible");
+    // showData.classList.remove("invisible");
+    // if (document.getElementById("renamePokemon").checked) {
+    //     getNameGen();
+    //     fetchPokeData(searchText);
+    // } else {
+    //     fetchPokeData(searchText);
+    //     characterName.value = "";
+    //     pokeNickname.textContent = "";
+    // }
+    savePokemon(searchText);
+});
+
+deleteListener.addEventListener("click", function(event) {
+    event.preventDefault();
+    localStorage.removeItem("Search History");
+    //reset the li tags 
+    historyButtonsEl.innerHTML = "";
+    pokeSearchesArray = JSON.parse(localStorage.getItem("Search History")) || [];
+    loadHistory();
+});
 
 loadHistory();

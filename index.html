@@ -36,12 +36,12 @@
             </button>
                 </div>
                 <div class="sm:order-first mt-3 sm:mt-0">
-                    <button type="button" href="#" class="w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-800 bg-yellow-200 hover:bg-yellow-300 md:py-4 md:text-lg md:px-10" id="saveBtn">
+                    <button id="saveListener" type="button" href="#" class="w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-800 bg-yellow-200 hover:bg-yellow-300 md:py-4 md:text-lg md:px-10" id="saveBtn">
               Save
             </button>
                 </div>
                 <div class="mt-3 sm:mt-0">
-                    <button type="button" href="#" class="w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-500 bg-red-400 hover:bg-red-500 md:py-4 md:text-lg md:px-10" id="deleteBtn">
+                    <button id="deleteListener" type="button" href="#" class="w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-500 bg-red-400 hover:bg-red-500 md:py-4 md:text-lg md:px-10" id="deleteBtn">
               Delete
             </button>
                 </div>
@@ -56,16 +56,11 @@
             >Do you want to give your Pokemon a Random Nickname?</span
           >
         </label>
-      </form>
-      <!--localStorage Div-->
-      <div>
-        <h2>Saved Searches:</h2>
-        <ul>
-          <li id="searchHistory"></li>
-        </ul>
-      </div>
+        </form>
+        <!--localStorage Div-->
+
     </main>
-    
+
     <!-- stacked card -->
     <!--Pokemon Name, Image & Details-->
     <div id="invisible" class="mt-8 invisible max-w-md container mx-auto text-center justify-center">
@@ -76,17 +71,14 @@
     </div>
     <div class="justify-space-between w-full flex justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md">
         <div>
-            <div class="card" id="history" style="display: none;">
-                <h3>Search History
-                </h3>
-                <div id="history-buttons">
+            <h2>Saved Searches:</h2>
+            <ul id="searchHistory">
 
-                </div>
-
-            </div>
+            </ul>
         </div>
-        <!-- link to javascript file -->
-        <script src="./assets/js/script.js"></script>
+    </div>
+    <!-- link to javascript file -->
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
