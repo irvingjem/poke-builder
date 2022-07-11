@@ -22,7 +22,7 @@
 ## Project Screenshot
 ![Project Screenshot](./assets/images/Project-Screenshot.png)
 ### Links
-[Project GitHub Repo](https://github.com/irvingjem/group-project) <br>
+[Project GitHub Repo](https://irvingjem.github.io/poke-builder/) <br>
 [Project in GitHub Pages](https://irvingjem.github.io/group-project/)
 
 ### Creators
